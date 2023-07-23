@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:final_project/pages/home/home_page.dart';
 
+import '../domain/models/product.dart';
 import '../pages/basket/basket_page.dart';
 import '../pages/catalog/catalog_page.dart';
 import '../pages/catalog/product_page.dart';

@@ -1,27 +1,41 @@
 import 'package:auto_route/annotations.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:decimal/intl.dart';
+import 'package:final_project/pages/widgets/button_add_basket.dart';
+import 'package:final_project/pages/widgets/price_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+
+import '../../domain/models/product.dart';
+import '../widgets/image_slideshow.dart';
 
 @RoutePage()
-class ProductPage extends StatefulWidget {
-  const ProductPage({super.key});
+class ProductPage extends StatelessWidget {
+  const ProductPage({super.key, required this.product, required this.productId});
 
-  @override
-  State<ProductPage> createState() => _ProductPageState();
-}
+  final Product product;
+  final int productId;
 
-class _ProductPageState extends State<ProductPage> {
+  double _discount(Product product){
+    final difference = num.parse(DecimalIntl(product.price).toString()) /
+        num.parse(DecimalIntl(product.oldPrice!).toString());
+    final d = 1 - difference;
+    return d * 100;
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    double? discount;
+    if (product.oldPrice != null){
+      discount = _discount(product);
+    }
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Заголовок карточки товара',
+          product.name,
           style: GoogleFonts.montserrat(
               fontSize: 16, height: 21, fontWeight: FontWeight.w500),
         ),
@@ -34,7 +48,7 @@ class _ProductPageState extends State<ProductPage> {
               width: 360,
               child: Row(
                 children: [
-                  Text('-44%',
+                  Text( discount != null ? '-${NumberFormat.decimalPatternDigits(decimalDigits: 2).format(discount)}%': 'Нет скидки :(',
                   style: GoogleFonts.montserrat(
                       fontSize: 18, fontWeight: FontWeight.w400, color: theme.colorScheme.onInverseSurface),
                   ),
@@ -54,106 +68,19 @@ class _ProductPageState extends State<ProductPage> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(58.5, 8, 58.5, 16),
-              child: ImageSlideshow(
-                width: 273,
-                  height: 296.01,
-                  indicatorColor: theme.colorScheme.onSurfaceVariant,
-                  indicatorPadding: 10.0025,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 23.01),
-                      child: CachedNetworkImage(
-                        imageUrl:
-                        'https://cdnn21.img.ria.ru/images/07e5/09/09/1749303395_658:0:2705:2047_1280x0_80_0_0_eb846e0ef7ab57e3711333ac09401cab.jpg',
-                        fit: BoxFit.fitWidth,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 23.01),
-                      child: CachedNetworkImage(
-                        imageUrl:
-                        'https://cdnn21.img.ria.ru/images/07e5/09/09/1749303395_658:0:2705:2047_1280x0_80_0_0_eb846e0ef7ab57e3711333ac09401cab.jpg',
-                        fit: BoxFit.fitWidth,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 23.01),
-                      child: CachedNetworkImage(
-                        imageUrl:
-                        'https://cdnn21.img.ria.ru/images/07e5/09/09/1749303395_658:0:2705:2047_1280x0_80_0_0_eb846e0ef7ab57e3711333ac09401cab.jpg',
-                        fit: BoxFit.fitWidth,
-                      ),
-                    ),
-                  ],
-              ),
-            ),
+            ImageSlideShow(product: product),
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
               child: SizedBox(
                 width: 360,
                 height: 84,
-                child: Text('Название товара Название товара Название товара Название товара',
+                child: Text(product.name,
                 style: GoogleFonts.montserrat(
                     fontSize: 20, fontWeight: FontWeight.w400, color: theme.colorScheme.outlineVariant),),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15, 0, 15, 32),
-              child: SizedBox(
-                width: 360,
-                height: 24,
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20),
-                      child: Text('162 394 Р',
-                          style: GoogleFonts.montserrat(
-                              fontSize: 18, fontWeight: FontWeight.w400, color: theme.colorScheme.onPrimary),
-                      ),
-                    ),
-                    Text('289 990 Р',
-                      style: GoogleFonts.montserrat(
-                          fontSize: 18, fontWeight: FontWeight.w400, color: theme.colorScheme.onSurfaceVariant,
-                        decoration: TextDecoration.lineThrough,
-                      decorationColor: theme.colorScheme.onSurfaceVariant),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15, 0, 15, 32),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  alignment: Alignment.centerRight,
-                  backgroundColor: Colors.black,
-                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero)),
-                  onPressed: (){},
-                  child: Row(
-                    children: [
-                      const Spacer(),
-                      Icon(CupertinoIcons.bag,
-                        color: theme.colorScheme.primary,
-                      ),
-                      const SizedBox(
-                        width: 12.6,
-                      ),
-                      Text(
-                        'В КОРЗИНУ',
-                        textAlign: TextAlign.left,
-                        style: GoogleFonts.raleway(
-                          fontSize: 12,
-                          color: theme.colorScheme.primary,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const Spacer(),
-                    ],
-                  ),
-            ),
-            ),
+            Price(product: product),
+            AddBasketButton(),
             Padding(
               padding: const EdgeInsets.fromLTRB(15, 11, 15, 11),
               child: Container(

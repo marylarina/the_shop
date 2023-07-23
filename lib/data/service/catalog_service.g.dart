@@ -19,47 +19,11 @@ class _CatalogService implements CatalogService {
   String? baseUrl;
 
   @override
-  Future<ProductDetailResponse> getProductDetail(
-      {required ProductDetailRequest request}) async {
+  Future<CatalogProductsResponse> getProducts() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ProductDetailResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/catalog/product',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = ProductDetailResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<CatalogProductsResponse> getProducts({
-    int? page,
-    int? size,
-    required CatalogProductsRequest request,
-  }) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'page': page,
-      r'size': size,
-    };
-    queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{};
-    final _data = request;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<CatalogProductsResponse>(Options(
       method: 'POST',
@@ -78,62 +42,6 @@ class _CatalogService implements CatalogService {
               baseUrl,
             ))));
     final value = CatalogProductsResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<ProductDetail> getProduct({int? productId}) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'product_id': productId};
-    queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<ProductDetail>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/catalog/product/',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = ProductDetail.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<AutocompleteResponse> getCatalogAutocomplete(
-      {required AutocompleteRequest request}) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<AutocompleteResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/catalog/autocomplete',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = AutocompleteResponse.fromJson(_result.data!);
     return value;
   }
 

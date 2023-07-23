@@ -1,13 +1,18 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:final_project/pages/widgets/info_board.dart';
+import 'package:final_project/pages/widgets/product_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../domain/models/product.dart';
+
 class ProductCard extends StatelessWidget {
   const ProductCard({
     super.key,
+    required this.product,
   });
+
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +22,7 @@ class ProductCard extends StatelessWidget {
         Stack(
           alignment: Alignment.topRight,
           children: [
-            CachedNetworkImage(
-              imageUrl:
-                  'https://cdnn21.img.ria.ru/images/07e5/09/09/1749303395_658:0:2705:2047_1280x0_80_0_0_eb846e0ef7ab57e3711333ac09401cab.jpg',
-              fit: BoxFit.fitWidth,
-            ),
+            ProductImage(product: product),
             IconButton(
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
@@ -34,8 +35,7 @@ class ProductCard extends StatelessWidget {
         Expanded(
           child: SizedBox(
             height: 32,
-            child: Text(
-              'Название товара Название товара',
+            child: Text(product.name,
               style: GoogleFonts.montserrat(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
@@ -43,7 +43,9 @@ class ProductCard extends StatelessWidget {
             ),
           ),
         ),
-        const InfoBoard(),
+        InfoBoard(
+          product: product,
+        ),
       ],
     );
   }

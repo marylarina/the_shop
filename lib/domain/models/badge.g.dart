@@ -8,22 +8,14 @@ part of 'badge.dart';
 
 _$_Badge _$$_BadgeFromJson(Map<String, dynamic> json) => _$_Badge(
       id: json['id'] as int,
-      title: json['title'] as String?,
       bgColor: json['bg_color'] as String?,
+      text: json['text'] as String?,
+      picture: json['picture'] as String?,
     );
 
-Map<String, dynamic> _$$_BadgeToJson(_$_Badge instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('title', instance.title);
-  writeNotNull('bg_color', instance.bgColor);
-  return val;
-}
+Map<String, dynamic> _$$_BadgeToJson(_$_Badge instance) => <String, dynamic>{
+      'id': instance.id,
+      'bg_color': instance.bgColor,
+      'text': instance.text,
+      'picture': instance.picture,
+    };

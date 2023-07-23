@@ -1,9 +1,14 @@
+import 'package:final_project/util/money_format/money_exstensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../domain/models/product.dart';
+
 class InfoBoard extends StatelessWidget {
-  const InfoBoard({super.key});
+  const InfoBoard({super.key, required this.product});
+
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +23,16 @@ class InfoBoard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                '1990 P',
+                product.price.formatMoney(),
                 style: GoogleFonts.montserrat(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   color: theme.colorScheme.onSecondary,
                 ),
               ),
+              if (product.oldPrice != null)
               Text(
-                '2990 P',
+                product.oldPrice!.formatMoney(),
                 style: GoogleFonts.montserrat(
                   fontSize: 10,
                   fontWeight: FontWeight.w300,
@@ -39,7 +45,6 @@ class InfoBoard extends StatelessWidget {
           ),
           const Spacer(),
           FloatingActionButton(
-            //elevation: 12,
             onPressed: () {},
             backgroundColor: Colors.black,
             shape: const CircleBorder(),

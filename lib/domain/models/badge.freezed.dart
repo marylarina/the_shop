@@ -21,9 +21,10 @@ Badge _$BadgeFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Badge {
   int get id => throw _privateConstructorUsedError;
-  String? get title => throw _privateConstructorUsedError;
   @JsonKey(name: 'bg_color')
   String? get bgColor => throw _privateConstructorUsedError;
+  String? get text => throw _privateConstructorUsedError;
+  String? get picture => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,10 @@ abstract class $BadgeCopyWith<$Res> {
       _$BadgeCopyWithImpl<$Res, Badge>;
   @useResult
   $Res call(
-      {int id, String? title, @JsonKey(name: 'bg_color') String? bgColor});
+      {int id,
+      @JsonKey(name: 'bg_color') String? bgColor,
+      String? text,
+      String? picture});
 }
 
 /// @nodoc
@@ -53,21 +57,26 @@ class _$BadgeCopyWithImpl<$Res, $Val extends Badge>
   @override
   $Res call({
     Object? id = null,
-    Object? title = freezed,
     Object? bgColor = freezed,
+    Object? text = freezed,
+    Object? picture = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String?,
       bgColor: freezed == bgColor
           ? _value.bgColor
           : bgColor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      text: freezed == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String?,
+      picture: freezed == picture
+          ? _value.picture
+          : picture // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -80,7 +89,10 @@ abstract class _$$_BadgeCopyWith<$Res> implements $BadgeCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id, String? title, @JsonKey(name: 'bg_color') String? bgColor});
+      {int id,
+      @JsonKey(name: 'bg_color') String? bgColor,
+      String? text,
+      String? picture});
 }
 
 /// @nodoc
@@ -93,32 +105,39 @@ class __$$_BadgeCopyWithImpl<$Res> extends _$BadgeCopyWithImpl<$Res, _$_Badge>
   @override
   $Res call({
     Object? id = null,
-    Object? title = freezed,
     Object? bgColor = freezed,
+    Object? text = freezed,
+    Object? picture = freezed,
   }) {
     return _then(_$_Badge(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String?,
       bgColor: freezed == bgColor
           ? _value.bgColor
           : bgColor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      text: freezed == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String?,
+      picture: freezed == picture
+          ? _value.picture
+          : picture // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
 }
 
 /// @nodoc
-
-@JsonSerializable(explicitToJson: true, includeIfNull: false)
+@JsonSerializable()
 class _$_Badge implements _Badge {
   const _$_Badge(
-      {required this.id, this.title, @JsonKey(name: 'bg_color') this.bgColor});
+      {required this.id,
+      @JsonKey(name: 'bg_color') this.bgColor,
+      this.text,
+      this.picture});
 
   factory _$_Badge.fromJson(Map<String, dynamic> json) =>
       _$$_BadgeFromJson(json);
@@ -126,14 +145,16 @@ class _$_Badge implements _Badge {
   @override
   final int id;
   @override
-  final String? title;
-  @override
   @JsonKey(name: 'bg_color')
   final String? bgColor;
+  @override
+  final String? text;
+  @override
+  final String? picture;
 
   @override
   String toString() {
-    return 'Badge(id: $id, title: $title, bgColor: $bgColor)';
+    return 'Badge(id: $id, bgColor: $bgColor, text: $text, picture: $picture)';
   }
 
   @override
@@ -142,13 +163,14 @@ class _$_Badge implements _Badge {
         (other.runtimeType == runtimeType &&
             other is _$_Badge &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.bgColor, bgColor) || other.bgColor == bgColor));
+            (identical(other.bgColor, bgColor) || other.bgColor == bgColor) &&
+            (identical(other.text, text) || other.text == text) &&
+            (identical(other.picture, picture) || other.picture == picture));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, bgColor);
+  int get hashCode => Object.hash(runtimeType, id, bgColor, text, picture);
 
   @JsonKey(ignore: true)
   @override
@@ -167,18 +189,21 @@ class _$_Badge implements _Badge {
 abstract class _Badge implements Badge {
   const factory _Badge(
       {required final int id,
-      final String? title,
-      @JsonKey(name: 'bg_color') final String? bgColor}) = _$_Badge;
+      @JsonKey(name: 'bg_color') final String? bgColor,
+      final String? text,
+      final String? picture}) = _$_Badge;
 
   factory _Badge.fromJson(Map<String, dynamic> json) = _$_Badge.fromJson;
 
   @override
   int get id;
   @override
-  String? get title;
-  @override
   @JsonKey(name: 'bg_color')
   String? get bgColor;
+  @override
+  String? get text;
+  @override
+  String? get picture;
   @override
   @JsonKey(ignore: true)
   _$$_BadgeCopyWith<_$_Badge> get copyWith =>

@@ -1,9 +1,7 @@
-import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 @RoutePage()
 class FavouritesPage extends StatefulWidget {
@@ -16,7 +14,6 @@ class FavouritesPage extends StatefulWidget {
 }
 
 class _FavouritesPageState extends State<FavouritesPage> {
-  //ProductClient get productClient => context.read();
 
 
   @override

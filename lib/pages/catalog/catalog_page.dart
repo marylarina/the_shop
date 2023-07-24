@@ -20,6 +20,8 @@ class CatalogPage extends StatefulWidget {
   State<CatalogPage> createState() => _CatalogPageState();
 }
 
+Product? exampleProduct; //для демонстрации пока что неработающей корзины, потом уберу честно
+
 class _CatalogPageState extends State<CatalogPage> {
   CatalogService get catalogService => context.read();
 
@@ -55,10 +57,11 @@ class _CatalogPageState extends State<CatalogPage> {
                   if (snapshot.connectionState == ConnectionState.none) {
                     return const Center(
                       child: Text(
-                        'ошибка при загрузке товаров',
+                        'Error',
                       ),
                     );
                   }
+                  exampleProduct = products?[0];
                   return Expanded(
                     child: GridView.builder(
                       keyboardDismissBehavior:
@@ -90,7 +93,8 @@ class _CatalogPageState extends State<CatalogPage> {
                       },
                     ),
                   );
-                }),
+                },
+            ),
           ],
         ),
       ),

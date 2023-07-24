@@ -46,9 +46,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     BasketRoute.name: (routeData) {
+      final args = routeData.argsAs<BasketRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const BasketPage(),
+        child: BasketPage(
+          key: args.key,
+          products: args.products,
+        ),
       );
     },
     CatalogRoute.name: (routeData) {
@@ -167,16 +171,39 @@ class ProfileTab extends PageRouteInfo<void> {
 
 /// generated route for
 /// [BasketPage]
-class BasketRoute extends PageRouteInfo<void> {
-  const BasketRoute({List<PageRouteInfo>? children})
-      : super(
+class BasketRoute extends PageRouteInfo<BasketRouteArgs> {
+  BasketRoute({
+    Key? key,
+    required List<Product> products,
+    List<PageRouteInfo>? children,
+  }) : super(
           BasketRoute.name,
+          args: BasketRouteArgs(
+            key: key,
+            products: products,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'BasketRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<BasketRouteArgs> page = PageInfo<BasketRouteArgs>(name);
+}
+
+class BasketRouteArgs {
+  const BasketRouteArgs({
+    this.key,
+    required this.products,
+  });
+
+  final Key? key;
+
+  final List<Product> products;
+
+  @override
+  String toString() {
+    return 'BasketRouteArgs{key: $key, products: $products}';
+  }
 }
 
 /// generated route for

@@ -80,7 +80,7 @@ class ProductPage extends StatelessWidget {
               ),
             ),
             Price(product: product),
-            AddBasketButton(),
+            const AddBasketButton(),
             Padding(
               padding: const EdgeInsets.fromLTRB(15, 11, 15, 11),
               child: Container(
